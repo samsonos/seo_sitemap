@@ -1,0 +1,10 @@
+{
+	"name":"samsonos/seo_sitemap",
+    "description":"SamsonPHP module for creating sitemap of web-site",
+	"author":{
+        "name":"Pavlo Onysko",
+        "email":"onysko@samsonos.com"
+    },
+	"version":"1.0.0",
+	"require":{"samsonos/php_core":"*"}
+}
