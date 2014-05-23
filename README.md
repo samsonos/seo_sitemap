@@ -10,8 +10,8 @@ System will automatically create
 
 ###Module Configuration
 Available two configurable parameters:
- * ```array $schema``` Array, where key is sitemap name and value is array of callback function, which returns array of elements for creating XNL 'url' objects and url prefix
- * ```string $imageSchemaHandler``` Callback function, which returns array of images for creating XML
+ * ```array $schema``` Array, where key is sitemap name and value is array of callback function, which returns array of elements for creating XNL 'url' objects and url prefix. Also value can contain collection of arrays
+ * ```string $imageSchemaHandler``` Callback function, which returns collection of images for creating XML
 
 ##Example configuration class for this module:
 ```
@@ -20,11 +20,15 @@ class SitemapConfig extends \samson\core\Config
     public $__module = 'sitemap';
 
     public $schema = array(
-        'companies' => array('sitemap_companies', 'companies/'),
-        'pages' => array('sitemap_pages', ''),
+        'products' => array(
+            array('getSmallProducts', 'small/'),
+            array('getBigProducts', 'big/')
+        ),
+        'companies' => array('getCompaniesForSitemap, 'companies/'),
+        'pages' => array('getPagesForSitemap', ''),
     );
 
-    public $imageSchemaHandler = 'sitemap_images';
+    public $imageSchemaHandler = 'getImagesForSitemap';
 }
 ```
 
