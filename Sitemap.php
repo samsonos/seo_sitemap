@@ -80,7 +80,6 @@ XML
     </urlset>
 XML
             );
-
             if (is_array(($this->schema[$key][0]))) {
                 $fileName = 'sitemap-'.$key.'.xml';
 
@@ -97,7 +96,6 @@ XML
 
                 $this->saveXml($fileName, $xml);
             }
-
             // Add elemet in general map
             $sitemapBlock = $sitemap->addChild('sitemap');
             $sitemapBlock->addChild('loc', 'http://'.$_SERVER['HTTP_HOST'].'/'.$fileName);
