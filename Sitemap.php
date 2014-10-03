@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by Vitaly Iegorov <egorov@samsonos.com>
+ * Created by Pavlo Onysko <onysko@samsonos.com>
  * on 21.05.14 at 10:51
  */
  
@@ -9,9 +9,8 @@ use samson\activerecord\dbRelation;
 
 /**
  * Class for interacting with SamsonPHP
- * @author Vitaly Egorov <egorov@samsonos.com>
+ * @author Pavlo Onysko <onysko@samsonos.com>
  * @copyright 2014 SamsonOS
- * @version 1.0.0
  */
 class Sitemap extends \samson\core\CompressableExternalModule
 {
@@ -40,6 +39,7 @@ class Sitemap extends \samson\core\CompressableExternalModule
 
         if (is_callable($callback)) {
             $response = true;
+            // If we have many materials, we need create loop limit for callback function
             $i = 0;
 
             while($response) {
