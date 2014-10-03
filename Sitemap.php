@@ -13,7 +13,7 @@ use samson\activerecord\dbRelation;
  * @copyright 2014 SamsonOS
  * @version 1.0.0
  */
-class Sitemap extends \samson\core\ExternalModule
+class Sitemap extends \samson\core\CompressableExternalModule
 {
     /** @var string module identifier */
     public $id = 'sitemap';
@@ -38,24 +38,34 @@ class Sitemap extends \samson\core\ExternalModule
         $callback = $array[0];
         $prefix = $array[1];
 
-        // If exists external handler
         if (is_callable($callback)) {
-            // Call external handler
-            foreach (call_user_func($callback) as $item) {
-                $url = $xml->addChild('url');
-                if (isset($item->Url)) {
-                    $url_path = url()->build().$prefix.$item->Url;
-                } else {
-                    $url_path = url()->build().$prefix.$item;
+            $response = true;
+            $i = 0;
+
+            while($response) {
+                $response = false;
+                $ar = call_user_func_array($callback, array($i, & $response));
+                foreach ($ar as $item) {
+                    $url = $xml->addChild('url');
+                    if (isset($item->Url)) {
+                        $url_path = url()->build().$prefix.$item->Url;
+                    } else {
+                        $url_path = url()->build().$prefix.$item;
+                    }
+                    $url->addChild('loc', $url_path);
                 }
-                $url->addChild('loc', $url_path);
+                $i++;
             }
         }
+
         return $xml;
     }
 
     public function __HANDLER()
     {
+        ini_set('memory_limit','4000M');
+        set_time_limit(2000);
+
         /** @var $generalMap String Main sitemap path */
         $generalMap = 'sitemap.xml';
 
