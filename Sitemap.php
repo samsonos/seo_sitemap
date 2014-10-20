@@ -15,7 +15,7 @@ use samson\activerecord\dbRelation;
 class Sitemap extends \samson\core\CompressableExternalModule
 {
     /** @var string module identifier */
-    public $id = 'sitemap';
+    public $id = 'sitemapcreate';
 
     /** @var array  */
     public $schema = array();

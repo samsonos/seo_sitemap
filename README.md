@@ -4,7 +4,7 @@
 > compression using external tools.
 
 ## Automatic sitemaps generation
-For creating sitemap you must visit url ```[domain]/sitemap```
+For creating sitemap you must visit url ```[domain]/sitemapcreate```
 System will automatically create
  * ```sitemap.xml``` xml file with general sitemap
 
@@ -17,7 +17,7 @@ Available two configurable parameters:
 ```
 class SitemapConfig extends \samson\core\Config
 {
-    public $__module = 'sitemap';
+    public $__module = 'sitemapcreate';
 
     public $schema = array(
         'products' => array(
