@@ -14,7 +14,7 @@ Available two configurable parameters:
  * ```string $imageSchemaHandler``` Callback function, which returns collection of images for creating XML
 
 ##Example configuration class for this module:
-```
+```php
 class SitemapConfig extends \samson\core\Config
 {
     public $__module = 'sitemapcreate';
