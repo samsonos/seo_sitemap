@@ -32,4 +32,34 @@ class SitemapConfig extends \samson\core\Config
 }
 ```
 
+## External handler example
+In your configuration  you must define your callback functions that must return collection of materials (or structures) for creating sitemap.
+If you have very big collection of data, we recommend to use two parameters for limiting in your function : 
+ * ```integer $limitStart``` Limit start position
+ * ```boolean & $response``` Return true if function must be called again
+
+###Example using parameters
+ 
+ ```php
+function getBigProducts($limitStart = 0, & $response = false) {
+	$query = dbQuery('material')->cond('type', 2)->limit($limitStart*200, 200);
+	$count_query = clone $query;
+
+    if ($count_query->count() < 200) {
+        $response = false;
+    } else {
+        $response = true;
+    }
+    return $query->exec();
+}
+```
+
+###Simple using example
+
+ ```php
+function getCompaniesForSitemap() {
+    return dbQuery('material')->cond('type', 3)->exec();
+}
+```
+ 
 Developed by [SamsonOS](http://samsonos.com/)
